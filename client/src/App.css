@@ -1,0 +1,99 @@
+.chatWidget{
+  background: #444753;
+  border-radius: 5px;
+  width: 400px;
+  height: 600px; 
+  padding: 8px;
+  position: absolute;
+  right: 10%;
+  bottom: 10px;
+}
+
+
+.chatHeader{
+  color: whitesmoke;
+  font-size: 20px;
+  background-color: gray;
+  padding: 10px;
+  border-radius: 5px;
+  width: 85%;
+}
+
+
+.messagesContainer{
+  height: 79%;
+  padding: 8px;
+  overflow-y: scroll;
+  
+}
+
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+
+.conectionModal{
+  width: 50%;
+  color: black;
+  background-color: aqua;
+  height: 80px;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  left: 20%;
+  top: 20%;  
+}
+
+
+.conectBtn{
+  color: #4A90E2;
+  font-size: 12px;
+  padding: 6px 10px;
+  transition: all .2s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  float: right;
+  margin-right:5px;
+  margin-top: 7px; 
+
+}
+
+
+.conectBtn:hover{
+  background: #fff;
+  color: #333;
+
+}
+
+
+.close{
+  display: none;
+}
+
+
+.endChat{
+  background-color: pink;
+  border-radius: 10px;
+  width: 600px;
+  height: 150px;
+  position: absolute;
+  top:20%;
+  left: 20%;
+  padding: 23px;
+  font-size: 24px;
+
+}
+
+
+.endChatBtn{
+  color: red;
+  font-size: 12px;
+  padding: 6px 10px;
+  transition: all .2s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  float: right;
+  margin-right:5px;
+  margin-top: 7px; 
+}

@@ -1,0 +1,40 @@
+::placeholder{
+    color: whitesmoke;
+}
+
+.inputContainer{
+    border-radius: 20px;
+    padding-top: 5px;
+  }
+  
+  .inputField {
+    border-radius: 3px;
+    border: none;
+    padding: 14px;
+    color: white;
+    background: #6A6C75;
+    font-size: 14px;
+    width: 70%;
+    height: 35px;
+  }
+  
+  
+  
+  .sendNewMessageBtn{
+    color: #4A90E2;
+    font-size: 12px;
+    padding: 6px 10px;
+    transition: all .2s ease;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right;
+    margin-right:5px;
+    margin-top: 7px; 
+    
+  }
+  
+  .sendNewMessageBtn:hover{
+    background: #fff;
+    color: #333;
+  
+  }
