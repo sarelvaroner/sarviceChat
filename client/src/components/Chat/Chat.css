@@ -1,0 +1,59 @@
+
+.chatWidget{
+  background: #444753;
+  border-radius: 5px;
+  width: 400px;
+  height: 600px; 
+  padding: 8px;
+  position: absolute;
+  right: 10%;
+  bottom: 10px;
+
+}
+
+
+.chatHeader{
+  color: whitesmoke;
+  font-size: 20px;
+  background-color: gray;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
+.messagesContainer{
+  height: 79%;
+  padding: 8px;
+  overflow-y: scroll;
+  
+}
+
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+
+
+
+
+.close{
+  display: none;
+}
+
+
+.endChat{
+  background-color: pink;
+  border-radius: 10px;
+  width: 600px;
+  height: 150px;
+  position: absolute;
+  top:20%;
+  left: 20%;
+  padding: 23px;
+  font-size: 24px;
+
+}
+
+
+

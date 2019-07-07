@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './SendMessage.css';
 
-class SendNewMessage extends React.Component {
+class SendNewMessage extends Component {
   constructor(props) {
     super(props);
     this.state = {

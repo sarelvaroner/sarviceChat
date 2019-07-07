@@ -1,26 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Message.css';
 
-class Message extends React.Component {
+class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myMessageClass: this.props.myMessageClass ? 'messageContainer myMwssage' : 'messageContainer',
-      messageInfoClass: this.props.myMessageClass ?'messageInfo mymessageInfo' : 'messageInfo'
-    };
-    
-  }
+       
+    }           
+}
+  
   render (){
+    const {authorId, content, userId} = this.props
+
     return (
-        <div className={this.state.myMessageClass}>
-            <div className={this.state.messageInfoClass}>
-                <div className="messageAuthor">
-                  {this.props.author}
-                </div>
-                {this.props.date}
-            </div>
-            <div className="messageContent">{this.props.content}
-            </div>
+        <div className={ authorId === userId     ? 'messageContainer myMwssage':  'messageContainer' }>
+            <div className="messageContent">{content}</div>
         </div>
         )
     }

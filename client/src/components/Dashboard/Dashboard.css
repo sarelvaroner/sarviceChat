@@ -1,0 +1,85 @@
+.Dashboard{
+    color: black;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    left: 3%;
+    top: 6%;
+    text-align: left;
+    margin-left: auto;
+    width: 556px;
+
+}
+
+
+.inputField{
+    background-color:#8CFFE7;
+    border:solid 1px #1A1266;
+    font-size:17px;
+    color: #0012FF;
+    -moz-border-radius:24px;
+    -webkit-border-radius:24px;
+    border-radius:24px;
+    padding-top:7px;
+    padding-bottom:7px;
+    padding-left:17px;
+    padding-right:17px;
+    vertical-align: middle;
+    margin-right: 20px;
+    float: left;
+    width:320px;
+}
+
+.Dashboard h1{
+    font-size: 25px;
+    color: #1A1266;
+    margin-left:10px;
+    
+} 
+  
+
+
+.connectBtn, .endChatBtn {
+    color: lightgoldenrodyellow;
+    margin-top: 30px;
+    background-color:#3650FF;
+    border:solid 2px #1A1266;
+    font-size:16px;
+    font-weight:bold;
+    padding-top:9px;
+    padding-bottom:9px;
+    padding-right:25px;
+    padding-left:25px;
+    -moz-border-radius:35px;
+    -webkit-border-radius:35px;
+    border-radius:35px;
+}
+
+
+
+
+.endChatBtn:hover, .connectBtn:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #6386c2));
+	background:-moz-linear-gradient(top, #476e9e 5%, #6386c2 100%);
+	background:-webkit-linear-gradient(top, #476e9e 5%, #6386c2 100%);
+	background:-o-linear-gradient(top, #476e9e 5%, #6386c2 100%);
+	background:-ms-linear-gradient(top, #476e9e 5%, #6386c2 100%);
+	background:linear-gradient(to bottom, #476e9e 5%, #6386c2 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#6386c2',GradientType=0);
+	background-color:#476e9e;
+}
+.connectBtn:active, .endChatBtn:active {
+	position:relative;
+	top:1px;
+}
+
+.endChatBtn {
+    color :deeppink;
+    margin-left: 10px;
+
+}
+
+/* .btnContainer{
+    display: inline-block;
+} */
