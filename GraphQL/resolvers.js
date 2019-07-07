@@ -9,7 +9,6 @@ const resolvers = {
 
       importConversation : async ( obj, { customerId }) => {
         const result = await mongoose.model('importConversation', conversationSchema).find({customerId, resolved: false})
-        console.log(result[0].messages)
         return result[0].messages
       },
 
@@ -51,11 +50,6 @@ const resolvers = {
         
       },
 
-      sendMessage : async (obj, {customerId, content, authorId}) => { 
-        console.log(customerId  + 'customerId,' + content  +"content,"  + authorId + "authorId"  )   
-        await mongoose.model('sendMessage', conversationSchema).find({customerId, resolved: false}).update({ $push: {messages: {content, authorId} }})
-      },
-
       resolvedConversation : async (obj, { _id }) => {   
         await mongoose.model('resolvedConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})
         mongoose.connection.close()        
@@ -75,6 +69,7 @@ const resolvers = {
       },
 
       createCustomer : async(obj, {customerName}) => {
+        console.log('SERVER ')
         return await mongoose.model('createCustomer', customerSchema).create({customerName})
       },
 
@@ -85,3 +80,11 @@ const resolvers = {
   };
 
   module.exports = resolvers
+
+
+  
+
+      // sendMessage : async (obj, {customerId, content, authorId}) => { 
+      //   console.log(customerId  + 'customerId,' + content  +"content,"  + authorId + "authorId"  )   
+      //   await mongoose.model('sendMessage', conversationSchema).find({customerId, resolved: false}).update({ $push: {messages: {content, authorId} }})
+      // }

@@ -4,7 +4,8 @@ import Dashboard from '../Dashboard/Dashboard'
 import DisplayMessages from '../DisplayMessages/DisplayMessages'
 import SendNewMessage from '../SendMwssage/SendMessage'
 import sendMessage    from '../../Apollo/mutations/sendMessage'
-
+import addCustumerToQueue from '../../Apollo/mutations/addCustumerQueue';
+addCustumerToQueue()
 
 const SERVICE = false
 const USER_NAME_KEY = SERVICE ? 'serviceChatAppCustomerName' : 'serviceChatAppServicePersonName'

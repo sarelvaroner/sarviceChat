@@ -6,35 +6,38 @@ import gql from "graphql-tag";
 
 
 
-const sendmessageservicePersonId=  gql`
-mutation{
-  exemplebringallservicepersons(servicePersonName:""){
-    _id    
-  }
+const sendMessageCustomereSchema=  gql`
+mutation($customerName: String) {
+    createCustomer(customerName: $customerName){
+     _id 
+    }
 }
 `
-const sendmessagecustomerId =  gql`
-mutation sendMessage ($customerIdInput: String, $contentInput: String, $authorIdInput: String){
-    
+
+
+const sendMessageServicePersonSchema=  gql`
+mutation($customerName: String) {
+    createCustomer(customerName: $customerName){
+     _id 
+    }
 }
 `
+
 
 
 const sendMessage = async (customerId, content, userId  ,service)=> {
 
-
-
     service = false
     content = "from react"
     const variables = {input : { customerId, content, authorId: userId } }     
-    const mutation  = service ? sendmessageservicePersonId : sendmessagecustomerId
+    const mutation  = service ? sendMessageServicePersonSchema : sendMessageCustomereSchema
     
     const {data} = await client.mutate({
         mutation,
         variables
     })
 //   alert(data)
-    alert('ddd')
+    alert(data)
   return 
 }
 

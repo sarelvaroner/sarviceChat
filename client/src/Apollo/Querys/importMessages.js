@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 
 const importmessagesBycustomerId =  gql`
 query{
-    importConversation(customerId:"a"){
+    importConversation(customerId:""){
       content
       authorId
       createdAt
@@ -33,7 +33,7 @@ const importMessages = async (userId ,service)=> {
     query,
     variables
   })
-
+  
   return data.importConversation
 }
 

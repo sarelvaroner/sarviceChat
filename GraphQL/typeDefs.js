@@ -3,22 +3,23 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
 
-
-
   type servicePerson{
     _id: String,  
     servicePersonName: String,    
   }
 
 
-  input inpotservicePerson{
+  input inputServicePerson{
     _id: String,  
     servicePersonName: String,
 
   }
 
 
+  input customerNameInput{
+    customerNameInput: String,
 
+  }
 
   type customer {
     _id: String,
@@ -60,12 +61,17 @@ const typeDefs = gql`
 
 
   type Mutation {
+    createCustomer(customerName: String): customer
+    
     addNewConversation(customerId: String, content: String, authorId: String, servicePersonId: String): [message]
-    sendMessage(input: messageInput): content
+
+
+
+
+
     
     resolvedConversation(_id: String):conversation
 
-    createCustomer(customerName: String): customer
     removeCustomer(_id:String ): customer
 
     ServicePersonMakeBuisy(_id: String):servicePerson
@@ -98,3 +104,4 @@ module.exports = typeDefs
 
 
 
+// sendMessage(input: messageInput): content
