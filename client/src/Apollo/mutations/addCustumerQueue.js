@@ -2,9 +2,9 @@ import client from '../Apollo'
 import gql from "graphql-tag";
 
 
-const addCustumerToQueueSchema=  gql`
+const mutation=  gql`
 mutation($customerName: String) {
-    createCustomer(customerName: $customerName){
+    addCustumerToQueue(customerName: $customerName){
      _id 
     }
 }
@@ -14,8 +14,8 @@ mutation($customerName: String) {
 const addCustumerToQueue = async (customerName)=> {
          
     const {data} = await client.mutate({
-        mutation: addCustumerToQueueSchema,
-        variables:{customerName}
+        mutation,
+        variables:{ customerName }
     })
   return data
 }

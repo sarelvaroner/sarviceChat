@@ -13,7 +13,7 @@ const resolvers = {
       },
 
       findAvailbleServicePerson: async() =>{
-        const result = await mongoose.model('service', servicePersonSchema).find({available:true}).sort({createdAt: 1})
+        const result = await mongoose.model('service', servicePersonSchema).find({ available:true }).sort({ createdAt: 1 })
         console.log(result);
         return result    
       },
@@ -46,15 +46,10 @@ const resolvers = {
 
 
         }
-        await mongoose.model('addNewConversation', conversationSchema).find({customerId, resolved: false}).update({ $push: {messages: {content, authorId} }})
+        await mongoose.model('addNewConversation', conversationSchema).find({customerId, resolved: false}).update({ $push: { messages: { content, authorId }}})
         
       },
-
-      resolvedConversation : async (obj, { _id }) => {   
-        await mongoose.model('resolvedConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})
-        mongoose.connection.close()        
-      },
-
+   
       createServicePerson : async (obj, {servicePersonName}) => {
         console.log('server')       
         return await mongoose.model('createServicePerson', servicePersonSchema).create({servicePersonName})
@@ -67,14 +62,26 @@ const resolvers = {
       ServicePersonMakeAvailable : async (obj, {_id}) => {   
         return await mongoose.model('ServicePersonMakeBuisy', servicePersonSchema).findOneAndUpdate({_id},{available:true})        
       },
-
-      createCustomer : async(obj, {customerName}) => {
-        console.log('SERVER ')
-        return await mongoose.model('createCustomer', customerSchema).create({customerName})
+      // done
+      addCustumerToQueue : async(obj, {customerName}) => {
+        return await mongoose.model('addCustumerToQueue', customerSchema).create({customerName})
       },
-
-      removeCustomer : async(obj, { _id }) => {   
-        return await mongoose.model('removeCustomer', customerSchema).findOneAndRemove({ _id })        
+      // done
+      removeCustomerFromQueue : async(obj, { _id }) => {
+        return await mongoose.model('removeCustomerFromQueue', customerSchema).findOneAndRemove({ _id })        
+      },
+            
+      // done
+      sendMessage : async (obj , { newMessage }) => {
+        const {  conversationId, content, userId, service } = newMessage
+        return await mongoose.model('sendMessage', conversationSchema).find({conversationId, resolved: false}).update({ $push: { messages: { content, userId, service }}})
+      },
+        // done
+        archiveConversation : async (obj, { _id }) => { 
+        console.log(_id , 'server')
+        const result =  await mongoose.model('archiveConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})
+        mongoose.connection.close()
+        return result
       }
     }
   };
@@ -83,8 +90,3 @@ const resolvers = {
 
 
   
-
-      // sendMessage : async (obj, {customerId, content, authorId}) => { 
-      //   console.log(customerId  + 'customerId,' + content  +"content,"  + authorId + "authorId"  )   
-      //   await mongoose.model('sendMessage', conversationSchema).find({customerId, resolved: false}).update({ $push: {messages: {content, authorId} }})
-      // }

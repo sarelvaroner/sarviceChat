@@ -4,7 +4,8 @@ const schema = mongoose.Schema
 
 const message = new schema({
     content: String,
-    authorId: String,    
+    userId: String,
+    service: Boolean,    
     },
     { collection: 'conversations' ,upsert :true, timestamps:true }
 )
@@ -17,12 +18,19 @@ const conversationSchema = new schema({
     resolved: { type :Boolean, default: false}  
     },
     {collection: 'conversations' ,upsert :true, timestamps:true }
+
 )
 
 
 
 
+
+
+
 module.exports =  conversationSchema
+
+
+
 
 
 

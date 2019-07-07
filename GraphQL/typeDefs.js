@@ -9,18 +9,6 @@ const typeDefs = gql`
   }
 
 
-  input inputServicePerson{
-    _id: String,  
-    servicePersonName: String,
-
-  }
-
-
-  input customerNameInput{
-    customerNameInput: String,
-
-  }
-
   type customer {
     _id: String,
     customerName: String,
@@ -29,18 +17,17 @@ const typeDefs = gql`
 
   type message{
     content: String,
-    timeStamp: String,
-    authorId: String,
+    userId: String,
     createdAt: String,   
+    service: Boolean,
   }
 
-
-
-
+  
   input messageInput {
-    customerIdInput: String,
-    contentInput: String,
-    authorIdInput: String,
+    _id: String,
+    content: String,
+    userId: String,
+    service: Boolean,
   }
 
 
@@ -49,10 +36,18 @@ const typeDefs = gql`
     customerId: String,
     servicePersonId: String,
     messages: [message],
-    resoled: Boolean, 
+    resolved: Boolean,
+    createdAt: String,
+    updatedAt: String,
   }
 
   
+
+
+
+
+
+
   type Query { 
     importConversation(customerId: String): [message]
     findAvailbleServicePerson(_id: String):servicePerson
@@ -61,18 +56,18 @@ const typeDefs = gql`
 
 
   type Mutation {
-    createCustomer(customerName: String): customer
+    addCustumerToQueue(customerName: String): customer
+    sendMessage( newMessage: messageInput ): message
+    archiveConversation(_id: String): conversation
+     
+
     
-    addNewConversation(customerId: String, content: String, authorId: String, servicePersonId: String): [message]
-
-
-
-
+    addNewConversation(customerId: String, content: String, userId: String, servicePersonId: String): [message]
 
     
     resolvedConversation(_id: String):conversation
 
-    removeCustomer(_id:String ): customer
+    removeCustomerFromQueue(_id: String ): customer
 
     ServicePersonMakeBuisy(_id: String):servicePerson
     ServicePersonMakeAvailable(_id: String):servicePerson

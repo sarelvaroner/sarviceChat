@@ -3,9 +3,17 @@ import './Chat.css';
 import Dashboard from '../Dashboard/Dashboard'
 import DisplayMessages from '../DisplayMessages/DisplayMessages'
 import SendNewMessage from '../SendMwssage/SendMessage'
-import sendMessage    from '../../Apollo/mutations/sendMessage'
-import addCustumerToQueue from '../../Apollo/mutations/addCustumerQueue';
-addCustumerToQueue()
+import sendMessage    from '../../Apollo/mutations/sendMessageMutation'
+import sendMessageMutation from '../../Apollo/mutations/sendMessageMutation';
+import archiveConversation from '../../Apollo/mutations/archiveConversation';
+import removeCustomerFromQueue from '../../Apollo/mutations/removeCustomerFromQueue';
+
+
+removeCustomerFromQueue("5d21cf119ae9366ab5ea905d")
+                        
+
+
+
 
 const SERVICE = false
 const USER_NAME_KEY = SERVICE ? 'serviceChatAppCustomerName' : 'serviceChatAppServicePersonName'

@@ -16,11 +16,13 @@ class DisplayMessages extends Component {
     
 
     async componentDidMount(){
+        if(this.props.userId){
         this.setState({ messages: await importMessages(this.props.userId, this.props.service)  });  
         const poolingData = setInterval(async () => {
              this.setState({ messages:await importMessages(this.props.userId, this.props.service)  });
         }, 1000);
         this.setState({ poolingData });
+        }
                
        
     }
