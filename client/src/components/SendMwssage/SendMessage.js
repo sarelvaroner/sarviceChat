@@ -21,14 +21,11 @@ class SendNewMessage extends Component {
     this.handleSendNewMessage = () => {
         if(this.state.currentMessage === '') return
          const {conversationId,  userId ,service} = this.props
-        sendMessageMutation(conversationId, this.state.currentMessage, userId ,service)
-        
-        alert(this.state.currentMessage)
-        // alert(window.location.href)
-
+        sendMessageMutation(conversationId, this.state.currentMessage, userId ,service)      
     }
-    
   }
+
+  
   render (){
     return (
         <div className="inputContainer  ">

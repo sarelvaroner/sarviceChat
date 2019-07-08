@@ -11,7 +11,6 @@ mutation($newMessage: messageInput) {
 }
 `
 
-
 const sendMessageMutation = async (conversationId, content, userId ,service)=> {
     
     const {data} = await client.mutate({

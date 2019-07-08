@@ -10,7 +10,6 @@ mutation($_id: String) {
 }
 `
 
-
 const removeCustomerFromQueue = async ( userId )=> {
          
     const {data} = await client.mutate({

@@ -10,7 +10,6 @@ mutation($_id: String) {
 }
 `
 
-
 const ServicePersonMakeAvailable = async ( _id )=> {
     
     const {data} = await client.mutate({

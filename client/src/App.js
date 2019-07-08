@@ -5,8 +5,6 @@ import './App.css';
 import Chat from './components/Chat/Chat'
 
 
-
-
 class App extends Component {
   render (){
     return (
@@ -16,7 +14,6 @@ class App extends Component {
     )
   }
 }
-
 
 
 export default App  ;

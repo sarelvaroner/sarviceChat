@@ -53,9 +53,6 @@ const typeDefs = gql`
   }
 
 
-
-
-
   type Query {
     findConversation( conversationInput: findMessageInput): conversation
     importMessages( _id: String): [message]
@@ -68,26 +65,12 @@ const typeDefs = gql`
     addCustumerToQueue(customerName: String): customer
     sendMessage( newMessage: messageInput ): message
     archiveConversation(_id: String): conversation
-     
-
-    
     addNewConversation(newConversation:conversationinput ): conversation
-
-    
     resolvedConversation(_id: String):conversation
-
     removeCustomerFromQueue(_id: String ): customer
-
     ServicePersonMakeBuisy(_id: String):servicePerson
     ServicePersonMakeAvailable(_id: String):servicePerson
-
     createServicePerson(servicePersonName: String): servicePerson
-
-
-    
-    
-
-
   }
 `;
 

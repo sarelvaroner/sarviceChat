@@ -12,7 +12,6 @@ const resolvers = {
         const pearms = service ? { servicePersonId: _id, resolved: false } : { customerId: _id, resolved: false }
 
         const result = await mongoose.model('findConversation', conversationSchema).find(pearms)
-        console.log(result[0]) 
         return  result ? result[0] : false
       },
 
@@ -58,21 +57,17 @@ const resolvers = {
       ServicePersonMakeAvailable : async (obj, {_id}) => {   
         return await mongoose.model('ServicePersonMakeBuisy', servicePersonSchema).findOneAndUpdate({_id},{available:true})        
       },
-      // done
       addCustumerToQueue : async(obj, {customerName}) => {
         return await mongoose.model('addCustumerToQueue', customerSchema).create({customerName})
       },
-      // done
       removeCustomerFromQueue : async(obj, { _id }) => {
         return await mongoose.model('removeCustomerFromQueue', customerSchema).findOneAndRemove({ _id })        
       },
             
-      // done
       sendMessage : async (obj , { newMessage }) => {
         const {  conversationId, content, userId, service } = newMessage
         return await mongoose.model('sendMessage', conversationSchema).find({conversationId, resolved: false}).update({ $push: { messages: { content, userId, service }}})
       },
-      // done
       archiveConversation : async (obj, { _id }) => { 
       console.log(_id , 'server')
       const result =  await mongoose.model('archiveConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})

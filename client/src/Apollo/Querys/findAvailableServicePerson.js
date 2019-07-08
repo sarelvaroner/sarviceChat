@@ -2,7 +2,6 @@ import client from '../Apollo'
 import gql from "graphql-tag";
 
 
-
 const query=  gql`
 query($_id: String) {
     findAvailableServicePerson(_id: $_id){

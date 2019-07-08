@@ -10,8 +10,6 @@ mutation($newConversation: conversationinput) {
 }
 `
 
-
-
 const addNewConversation = async ( customerId, servicePersonId )=> {
     
     const {data} = await client.mutate({
