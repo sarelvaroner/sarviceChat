@@ -41,16 +41,25 @@ const typeDefs = gql`
     updatedAt: String,
   }
 
+
+  input findMessageInput{
+    _id: String,
+    service: Boolean,
+  }
   
+  input conversationinput{
+    customerId: String,
+    servicePersonId: String,
+  }
 
 
 
 
 
-
-  type Query { 
-    importConversation(customerId: String): [message]
-    findAvailbleServicePerson(_id: String):servicePerson
+  type Query {
+    findConversation( conversationInput: findMessageInput): conversation
+    importMessages( _id: String): [message]
+    findAvailableServicePerson(_id: String):servicePerson
     findAvailbleCustomer(_id: String):customer
   }
 
@@ -62,7 +71,7 @@ const typeDefs = gql`
      
 
     
-    addNewConversation(customerId: String, content: String, userId: String, servicePersonId: String): [message]
+    addNewConversation(newConversation:conversationinput ): conversation
 
     
     resolvedConversation(_id: String):conversation

@@ -8,7 +8,9 @@
   position: absolute;
   right: 10%;
   bottom: 10px;
-
+  position: fixed;
+  bottom: 3px;
+  right: 69px;
 }
 
 
@@ -22,9 +24,9 @@
 
 
 .messagesContainer{
-  height: 79%;
   padding: 8px;
   overflow-y: scroll;
+  overflow: hidden;
   
 }
 

@@ -7,20 +7,27 @@ const conversationSchema  = require('../mongoDb/conversation')
 const resolvers = {
     Query: {
 
-      importConversation : async ( obj, { customerId }) => {
-        const result = await mongoose.model('importConversation', conversationSchema).find({customerId, resolved: false})
+      findConversation: async ( obj, { conversationInput }) => {
+        const { _id , service } = conversationInput
+        const pearms = service ? { servicePersonId: _id, resolved: false } : { customerId: _id, resolved: false }
+
+        const result = await mongoose.model('findConversation', conversationSchema).find(pearms)
+        console.log(result[0]) 
+        return  result ? result[0] : false
+      },
+
+      importMessages : async ( obj, { _id }) => {
+        const result = await mongoose.model('importMessages', conversationSchema).find({ _id , resolved: false})
         return result[0].messages
       },
 
-      findAvailbleServicePerson: async() =>{
-        const result = await mongoose.model('service', servicePersonSchema).find({ available:true }).sort({ createdAt: 1 })
-        console.log(result);
-        return result    
+      findAvailableServicePerson: async() =>{
+        const result = await mongoose.model('findAvailableServicePerson', servicePersonSchema).find({ available : true }).sort({ createdAt: 1 })
+        return result[0]    
       },
 
       findAvailbleCustomer: async() =>{
-        const result = await mongoose.model('findAvailbleCustomer', customerSchema).find({}).sort({createdAt: 1})
-        console.log(result[0] )
+        const result = await mongoose.model('findAvailbleCustomer', customerSchema).find({}).sort({createdAt: 1})    
         return result[0]    
       }
       
@@ -28,30 +35,19 @@ const resolvers = {
     
     
     Mutation: {
-      addNewConversation : async (obj, {customerId, content, authorId, servicePersonId}) => {
-        console.log(customerId, content, authorId, servicePersonId)
-   
-        const openConversation = await mongoose.model('addNewConversation', conversationSchema).find({customerId, resolved: false})
-        console.log(openConversation)
-   
-        if (!openConversation || openConversation.length === 0){
-      
-          const newConversation =  new mongoose.model('addNewConversation', conversationSchema)({
-            customerId,
-            servicePersonId,
-            messeges:[{ content: 'you are connected to chat', authorId: "sistem message" }],
-            resolved: false         
-          })
-          newConversation.save((err, cust) => { if ( err ) return console.error( err ) })
-
-
-        }
-        await mongoose.model('addNewConversation', conversationSchema).find({customerId, resolved: false}).update({ $push: { messages: { content, authorId }}})
-        
+      addNewConversation : async (obj, { newConversation } ) => { 
+        const {customerId, servicePersonId} = newConversation
+        console.log(customerId, servicePersonId)
+        newConversation =  new mongoose.model('addNewConversation', conversationSchema)({
+          customerId,
+          servicePersonId,
+          messeges:[],
+          resolved: false         
+        })
+        newConversation.save((err, cust) => { if ( err ) return console.error( err ) })
       },
    
       createServicePerson : async (obj, {servicePersonName}) => {
-        console.log('server')       
         return await mongoose.model('createServicePerson', servicePersonSchema).create({servicePersonName})
       },
 
@@ -76,12 +72,12 @@ const resolvers = {
         const {  conversationId, content, userId, service } = newMessage
         return await mongoose.model('sendMessage', conversationSchema).find({conversationId, resolved: false}).update({ $push: { messages: { content, userId, service }}})
       },
-        // done
-        archiveConversation : async (obj, { _id }) => { 
-        console.log(_id , 'server')
-        const result =  await mongoose.model('archiveConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})
-        mongoose.connection.close()
-        return result
+      // done
+      archiveConversation : async (obj, { _id }) => { 
+      console.log(_id , 'server')
+      const result =  await mongoose.model('archiveConversation', conversationSchema).findOneAndUpdate({_id},{resolved :true})
+      mongoose.connection.close()
+      return result
       }
     }
   };

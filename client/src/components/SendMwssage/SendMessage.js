@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './SendMessage.css';
+import sendMessageMutation from '../../Apollo/mutations/sendMessageMutation';
+
 
 class SendNewMessage extends Component {
   constructor(props) {
@@ -18,6 +20,9 @@ class SendNewMessage extends Component {
 
     this.handleSendNewMessage = () => {
         if(this.state.currentMessage === '') return
+         const {conversationId,  userId ,service} = this.props
+        sendMessageMutation(conversationId, this.state.currentMessage, userId ,service)
+        
         alert(this.state.currentMessage)
         // alert(window.location.href)
 
@@ -27,7 +32,7 @@ class SendNewMessage extends Component {
   render (){
     return (
         <div className="inputContainer  ">
-            <textarea onChange={this.handleChangeInput} className="inputField" placeholder={'please type here'}></textarea>
+            <textarea onChange={this.handleChangeInput} className="inputField chat" placeholder={'please type here'}></textarea>
             <button onClick={this.handleSendNewMessage} className="sendNewMessageBtn">SEND</button>
         </div> 
         )

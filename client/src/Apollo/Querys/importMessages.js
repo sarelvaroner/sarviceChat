@@ -2,40 +2,34 @@ import client from '../Apollo'
 import gql from "graphql-tag";
 
 
-const importmessagesBycustomerId =  gql`
-query{
-    importConversation(customerId:""){
-      content
-      authorId
-      createdAt
-      
+const query =  gql`
+  query ($_id: String) {
+    importMessages(_id: $_id){
+    content
+    userId
+    service
+    createdAt
+
     }
   }
-`
+  `
 
 
-const importmessagesByservicePersonId=  gql`
-query{
-  exemplebringallservicepersons(servicePersonName:""){
-    _id    
-  }
-}
-`
-
-
-const importMessages = async (userId ,service)=> {
-  service = false
-
-  const variables = service ? {servicePersonId: userId}       : { customerId: userId }
-  const query     = service ? importmessagesByservicePersonId : importmessagesBycustomerId
+const importMessages = async ( _id )=> {
 
   const {data} = await client.query({
     query,
-    variables
+    variables:{ _id }
   })
-  
-  return data.importConversation
+
+  return data.importMessages
 }
 
 
 export default importMessages;
+
+
+
+
+
+

@@ -10,10 +10,10 @@ class Message extends Component {
 }
   
   render (){
-    const {authorId, content, userId} = this.props
+    const {service, content } = this.props
 
     return (
-        <div className={ authorId === userId     ? 'messageContainer myMwssage':  'messageContainer' }>
+        <div className={ service === this.props.messageFromServise   ? 'messageContainer myMwssage':  'messageContainer' }>
             <div className="messageContent">{content}</div>
         </div>
         )

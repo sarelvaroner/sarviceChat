@@ -3,9 +3,10 @@ const schema = mongoose.Schema
 
 
 const servicePersonSchema = new schema({
-    servicePersonName: String,},
-    {
-    collection: 'availableForService' ,upsert :true, timestamps:true
+    servicePersonName: String,
+    available: Boolean,
+    },
+    {collection: 'availableForService' ,upsert :true, timestamps:true
 });
   
 

@@ -16,6 +16,9 @@
     float: right;
     margin-right:5px;
     margin-top: 7px; 
+    position: absolute;
+    bottom: 48px;
+    right: 9px;
     
   }
   
@@ -24,3 +27,13 @@
     color: #333;
   
   }
+
+
+  .chat{
+    width: 310px;
+    height: 100px;
+    position: absolute;
+    bottom: 15px;
+    left: 13px;
+  }
+

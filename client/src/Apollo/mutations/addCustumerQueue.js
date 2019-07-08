@@ -17,7 +17,8 @@ const addCustumerToQueue = async (customerName)=> {
         mutation,
         variables:{ customerName }
     })
-  return data
+
+  return data.addCustumerToQueue._id
 }
 
 

@@ -15,16 +15,15 @@ class DisplayMessages extends Component {
     }
     
 
-    async componentDidMount(){
+    async componentDidMount(){   
         if(this.props.userId){
-        this.setState({ messages: await importMessages(this.props.userId, this.props.service)  });  
+        this.setState({ messages: await importMessages(this.props.conversationId)  });  
         const poolingData = setInterval(async () => {
-             this.setState({ messages:await importMessages(this.props.userId, this.props.service)  });
+             this.setState({ messages:await importMessages(this.props.conversationId)  });
         }, 1000);
         this.setState({ poolingData });
         }
                
-       
     }
 
     componentWillUnmount() {
@@ -40,7 +39,8 @@ class DisplayMessages extends Component {
                         <Message
                             key={index}
                             content ={message.content}
-                            authorId={message.authorId} >
+                            authorId={message.userId}
+                            myMessaeg={message.userId === this.props.userId} >
                         </Message>) : this.state.messages 
             }         
         </Fragment>
