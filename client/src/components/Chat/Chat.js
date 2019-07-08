@@ -13,12 +13,7 @@ import ServicePersonMakeAvailable from '../../Apollo/mutations/ServicePersonMake
 import addNewConversation from '../../Apollo/mutations/addNewConversation';
 import archiveConversation from '../../Apollo/mutations/archiveConversation';
 import removeCustomerFromQueue from '../../Apollo/mutations/removeCustomerFromQueue';
-
-
-const SERVICE_KEY = 'service'
-const USER_NAME_KEY ='userName' 
-const USER_ID_KEY   = 'userID'
-const CONVERSATION_ID_KEY   = 'conversation' 
+import { storeItems, getItems, removeItemsFromStore } from '../../../utils/storeItems'
 
 
 class Chat extends Component {
@@ -29,31 +24,16 @@ class Chat extends Component {
       userName: null,
       service:null,
       conversationId: null,     
-      isOpenConversation: false, 
-      endChatModalClass: 'close',
-      servicePersonId: null
+      isOpenConversation: null, 
+      servicePersonId: null,
+      endChatModalClass: 'close'
     }     
   }
 
 
   componentDidMount(){
-    try{
-      this.setState({
-        userId: localStorage.getItem(USER_ID_KEY)     ? localStorage.getItem(USER_ID_KEY)   : null,
-        userName: localStorage.getItem(USER_NAME_KEY) ? localStorage.getItem(USER_NAME_KEY) : null,
-        service: localStorage.getItem(SERVICE_KEY)    ? localStorage.getItem(SERVICE_KEY)   : false,
-        conversationId: localStorage.getItem(CONVERSATION_ID_KEY)    ? localStorage.getItem(CONVERSATION_ID_KEY)   : null,
-        isOpenConversation: this.state.conversationId ? true : false
-      })
-    }
-    catch{
-      this.setState({
-        service: false,
-      })
-    }
+    this.setState(getItems()) 
   }
-
-  
 
 
   openChatHandler = async (name, userId , service) => {
@@ -80,41 +60,36 @@ class Chat extends Component {
         this.setState({ isOpenConversation: true })       
       }
       removeCustomerFromQueue(this.state.userId)
-       
     }    
   }
 
   endChatHandler = ( ) =>{
-    ServicePersonMakeAvailable(this.state.servicePersonId)
-    archiveConversation(this.state.conversationId)
+    const {  conversationId, servicePersonId } = this.state
+
+    ServicePersonMakeAvailable(servicePersonId)
+    archiveConversation(conversationId)
     this.setState({
       userId: null,
       userName: null,
       service: null,
-      conversationId: null,     
-      isOpenConversation: false, 
-      endChatModalClass: 'close',
-      servicePersonId: null
+      conversationId: null,
+      isOpenConversation: false,
+      servicePersonId: null,
+      endChatModalClass: 'close'
     })
-    localStorage.removeItem(USER_ID_KEY) 
-    localStorage.removeItem(USER_NAME_KEY) 
-    localStorage.removeItem(SERVICE_KEY)    
-    localStorage.removeItem(CONVERSATION_ID_KEY)
+    removeItemsFromStore()
   }
-
-
-
-
-
-  
-  
-
+   
 
   render (){
     const { userId, isOpenConversation, conversationId } = this.state
     return (
       <Fragment> 
-        <Dashboard openChatClicked={this.openChatHandler.bind(this)} endChatclicked={this.endChatHandler.bind(this)}></Dashboard>
+        <Dashboard 
+          openChatClicked={this.openChatHandler.bind(this)}
+          endChatclicked={this.endChatHandler.bind(this)}>
+
+        </Dashboard>
         {
           isOpenConversation ? 
               <div className={`chatWidget `}>
