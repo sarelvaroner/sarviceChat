@@ -17,7 +17,7 @@ const resolvers = {
 
       importMessages : async ( obj, { _id }) => {
         const result = await mongoose.model('importMessages', conversationSchema).find({ _id , resolved: false})
-        return result[0].messages
+        return result[0] ? result[0].messages : []
       },
 
       findAvailableServicePerson: async() =>{
@@ -44,6 +44,7 @@ const resolvers = {
           resolved: false         
         })
         newConversation.save((err, cust) => { if ( err ) return console.error( err ) })
+        return newConversation
       },
    
       createServicePerson : async (obj, {servicePersonName}) => {
@@ -55,7 +56,7 @@ const resolvers = {
       },
 
       ServicePersonMakeAvailable : async (obj, {_id}) => {   
-        return await mongoose.model('ServicePersonMakeBuisy', servicePersonSchema).findOneAndUpdate({_id},{available:true})        
+        return await mongoose.model('ServicePersonMakeAvailable', servicePersonSchema).findOneAndUpdate({_id},{available:true})        
       },
       addCustumerToQueue : async(obj, {customerName}) => {
         return await mongoose.model('addCustumerToQueue', customerSchema).create({customerName})

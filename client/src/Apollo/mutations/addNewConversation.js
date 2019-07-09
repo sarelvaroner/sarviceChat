@@ -17,7 +17,7 @@ const addNewConversation = async ( customerId, servicePersonId )=> {
         variables: { newConversation: { customerId, servicePersonId }}
     })
     
-  return data
+  return data.addNewConversation._id
 }
 
 

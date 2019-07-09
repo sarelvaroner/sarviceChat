@@ -21,7 +21,8 @@ class SendNewMessage extends Component {
     this.handleSendNewMessage = () => {
         if(this.state.currentMessage === '') return
          const {conversationId,  userId ,service} = this.props
-        sendMessageMutation(conversationId, this.state.currentMessage, userId ,service)      
+        sendMessageMutation(conversationId, this.state.currentMessage, userId ,service)
+        this.setState({currentMessage: ''});      
     }
   }
 
@@ -29,8 +30,8 @@ class SendNewMessage extends Component {
   render (){
     return (
         <div className="inputContainer  ">
-            <textarea onChange={this.handleChangeInput} className="inputField chat" placeholder={'please type here'}></textarea>
-            <button onClick={this.handleSendNewMessage} className="sendNewMessageBtn">SEND</button>
+            <textarea onChange={this.handleChangeInput} className="inputField chat" placeholder={'please type here'} value={this.state.currentMessage}></textarea>
+            <button onClick={this.handleSendNewMessage} className="sendNewMessageBtn" disabled={this.state.currentMessage.length > 0}>SEND</button>
         </div> 
         )
     }

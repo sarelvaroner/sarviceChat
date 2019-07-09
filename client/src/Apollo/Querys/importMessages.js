@@ -21,7 +21,6 @@ const importMessages = async ( _id )=> {
     query,
     variables:{ _id }
   })
-
   return data.importMessages
 }
 
