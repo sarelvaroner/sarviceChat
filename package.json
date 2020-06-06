@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.6.7",
+    "apollo-server": "^2.14.2",
     "concurrently": "^4.1.1",
     "dotenv": "^8.0.0",
     "git": "^0.1.5",
